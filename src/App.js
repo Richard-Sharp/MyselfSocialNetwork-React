@@ -18,7 +18,7 @@ const App = (props) => {
           <SideBar/>
         <div className={style.wrapper_page}>
           <Route path='/profilePage' render = {() => <Profile />}/>
-          {/*<Route path='/messagePage' render = {() => <MessagePageContainer />}/>*/}
+          <Route path='/messagePage' render = {() => <MessagePageContainer />}/>
           {/* <Route exact path='/#settingsPage' component = {Settings}/> */}
         </div>
         </div>

@@ -8,9 +8,9 @@ import Message from "./Message/Message";
 const MessagePage = (props) => {
 	let state = props.messagePage;
 
-	let dialogsList = state.messagePage.dialogsState.map(d => <Dialog name={d.name} id={d.id} userAvatar={d.userAvatar}/> );
-	let messagesList = state.messagePage.messagesState.map(m => <Message message={m.message} id={m.id}/> );
-	let newMessageBody = state.messagePage.newMessageBody;
+	let dialogsList = state.dialogsState.map(d => <Dialog name={d.name} id={d.id} userAvatar={d.userAvatar}/> );
+	let messagesList = state.messagesState.map(m => <Message message={m.message} id={m.id}/> );
+	let newMessageBody = state.newMessageBody;
 
 	let onSendMessageClick = () => {
 		props.sendMessage();
