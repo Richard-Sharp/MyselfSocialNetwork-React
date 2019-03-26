@@ -1,0 +1,30 @@
+.sideBar {
+  width: 20%;
+  border: 2px solid black;
+  background-color: silver;
+  text-align: center;
+  margin-right: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.menu {
+  margin: 15px;
+  width: 70%;
+  background-color: grey;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.sideBar a {
+  text-decoration: none;
+  color: white;
+}
+
+a.active {
+  color: lawngreen;
+  font-weight: bold;
+}

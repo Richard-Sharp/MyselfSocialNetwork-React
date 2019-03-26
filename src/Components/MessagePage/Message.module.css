@@ -1,0 +1,59 @@
+.messagePage {
+    width: 100%;
+    border: 2px dotted black;
+    background-color: silver;
+    padding: 10px;
+    display: flex;
+    /*flex-direction: column;*/
+}
+
+.massage {
+    height: 100px;
+    width: 80%;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+.dialogs {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 15px;
+    width: 20%;
+}
+
+.dialog {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 10px;
+    font-size: large;
+    text-align: center;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.dialog a {
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+}
+
+.messages {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 15px;
+    width: 75%;
+}
+
+.message {
+
+}
+
+.userAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+

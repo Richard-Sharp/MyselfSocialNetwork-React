@@ -1,0 +1,30 @@
+.prof_settings {
+  margin: 5px;
+}
+
+.profile_records {
+  /*height: 45%;*/
+  width: 100%;
+  border: 1px solid black;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.add_record {
+  display: flex;
+  align-items: center;
+  padding: 0px 0px 5px 0px;
+}
+
+.button {
+  margin: 10px;
+}
+
+.textArea {
+  resize: none;
+}
+
+
+
+
