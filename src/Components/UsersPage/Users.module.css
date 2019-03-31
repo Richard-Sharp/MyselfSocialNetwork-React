@@ -1,0 +1,21 @@
+.avatar {
+  margin: 10px 10px 0px 10px;
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+}
+
+.name {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.status {
+  margin-left: 10px;
+
+}
+
+.user {
+  margin-bottom: 20px;
+}
+

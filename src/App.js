@@ -6,6 +6,7 @@ import style from './App.module.css';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Profile from './Components/Profile/Profile';
 import MessagePageContainer from "./Components/MessagePage/MessagePageContainer";
+import UsersContainer from "./Components/UsersPage/UsersContainer";
 
 
 const App = (props) => {
@@ -19,6 +20,7 @@ const App = (props) => {
         <div className={style.wrapper_page}>
           <Route path='/profilePage' render = {() => <Profile />}/>
           <Route path='/messagePage' render = {() => <MessagePageContainer />}/>
+          <Route path='/UsersPage' render = {() => <UsersContainer />}/>
           {/* <Route exact path='/#settingsPage' component = {Settings}/> */}
         </div>
         </div>

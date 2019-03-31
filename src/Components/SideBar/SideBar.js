@@ -11,6 +11,9 @@ const SideBar = () => {
 					<NavLink to="/messagePage" activeClassName={style.active}>Сообщения</NavLink>
         </span>
 				<span className={style.menu}>
+					<NavLink to="/UsersPage" activeClassName={style.active}>Пользователи</NavLink>
+        </span>
+				<span className={style.menu}>
           <NavLink to="/friendPage" activeClassName={style.active}>Друзья</NavLink>
         </span>
 				<span className={style.menu}>
