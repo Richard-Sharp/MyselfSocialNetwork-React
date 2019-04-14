@@ -21,7 +21,7 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_RECORD:
-			let newMessage = {record: action.message, name: 'Peta'}
+			let newMessage = {record: action.message, name: state.profile.name}
 			let newRecordsState = [newMessage, ...state.recordsState];
 			state.newRecordText = '';
 			return {...state, recordsState: newRecordsState};

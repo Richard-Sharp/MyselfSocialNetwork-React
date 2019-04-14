@@ -8,13 +8,13 @@ const SideBar = () => {
         <span className={style.menu}>
           <NavLink to="/profilePage" activeClassName={style.active}>Профиль</NavLink></span>
 				<span className={style.menu}>
-					<NavLink to="/messagePage" activeClassName={style.active}>Сообщения</NavLink>
+					<NavLink to="/messagesPage" activeClassName={style.active}>Сообщения</NavLink>
         </span>
 				<span className={style.menu}>
 					<NavLink to="/UsersPage" activeClassName={style.active}>Пользователи</NavLink>
         </span>
 				<span className={style.menu}>
-          <NavLink to="/friendPage" activeClassName={style.active}>Друзья</NavLink>
+          <NavLink to="/friendsPage" activeClassName={style.active}>Друзья</NavLink>
         </span>
 				<span className={style.menu}>
   				<NavLink to="/audioPage" activeClassName={style.active}>Музыка</NavLink>

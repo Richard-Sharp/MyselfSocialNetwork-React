@@ -1,19 +1,16 @@
 import React from 'react';
 import style from './Profile.module.css';
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import RecordsWallContainer from "./RecordsWall/RecordsWallContainer";
+import ProfileInfoContainer from "./ProfileInfo/ProfileInfoContainer";
 
 
-const Profile = (props) => {
+const Profile = () => {
 
 	return (
 			<div>
 				<div className={style.profile}>
-					{/*<img className={style.profileImg} src="../../img/profile-img.jpg" alt=""/>*/}
-					{/*<img className={style.profileImg}> scr	*/}
-					{/*</img>*/}
 				</div>
-					{/*<ProfileInfo/>*/}
+					<ProfileInfoContainer/>
 					<RecordsWallContainer/>
 			</div>
 	);

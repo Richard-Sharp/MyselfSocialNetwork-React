@@ -14,10 +14,10 @@ const ProfileInfo = (props) => {
 
 				<div className={style.description}>
             <span>
-            <h3>{`${props.profileInfo.profilePage.profile.name} ${props.profileInfo.profilePage.profile.surname}`}</h3>
-            <p>Дата рождения: {props.profileInfo.profilePage.profile.date_brth} </p>
-            <p>Пол: {props.profileInfo.profilePage.profile.male}</p>
-            <p>Образование: {props.profileInfo.profilePage.profile.education}</p>
+            <h3>{`${props.name} ${props.surname}`}</h3>
+            <p>Дата рождения: {props.date_brth} </p>
+            <p>Пол: {props.male}</p>
+            <p>Образование: {props.education}</p>
             </span>
 				</div>
 			</div>

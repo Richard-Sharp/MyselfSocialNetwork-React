@@ -6,7 +6,10 @@ import style from './App.module.css';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Profile from './Components/Profile/Profile';
 import MessagePageContainer from "./Components/MessagePage/MessagePageContainer";
-import UsersContainer from "./Components/UsersPage/UsersContainer";
+// import UsersContainer from "./Components/UsersPage/UsersContainer";
+import SetUsersPageContainer from "./Components/UsersPage/SetUsersPageContainer";
+import FriendsPageContainer from "./Components/FriendsPage/FriedsPageContainer";
+
 
 
 const App = (props) => {
@@ -19,8 +22,9 @@ const App = (props) => {
           <SideBar/>
         <div className={style.wrapper_page}>
           <Route path='/profilePage' render = {() => <Profile />}/>
-          <Route path='/messagePage' render = {() => <MessagePageContainer />}/>
-          <Route path='/UsersPage' render = {() => <UsersContainer />}/>
+          <Route path='/messagesPage' render = {() => <MessagePageContainer />}/>
+          <Route path='/UsersPage' render = {() => <SetUsersPageContainer />}/>
+          <Route path='/FriendsPage' render = {() => <FriendsPageContainer />}/>
           {/* <Route exact path='/#settingsPage' component = {Settings}/> */}
         </div>
         </div>
