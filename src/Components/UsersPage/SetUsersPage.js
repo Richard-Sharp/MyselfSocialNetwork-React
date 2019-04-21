@@ -1,6 +1,6 @@
 import React from 'react';
-import SNAxios from "../../Services/SNAxios";
-import {baseUserImg} from "../../Services/BaseImgs";
+import SNAxios from "../../Services(DAL)/SNAxios";
+import {baseUserImg} from "../../Services(DAL)/BaseImgs";
 
 
 let style = {

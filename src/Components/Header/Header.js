@@ -1,11 +1,14 @@
 import React from 'react';
 import style from './Header.module.css';
+import LoginInfoContainer from "../../Login/LoginInfo";
 
 
 const Header = () => {
    return (
     <div className = {style.header}>
-		  <span>HEADER</span>	 
+		 	<div>
+				<LoginInfoContainer/>
+			</div>
 	  </div>
   );
 }

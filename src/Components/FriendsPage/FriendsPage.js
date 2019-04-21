@@ -1,8 +1,8 @@
 import React from 'react';
 import {statuses} from "../../Redux/FriendsPageReducer";
 import style from './FriendsPage.module.css';
-import SNAxios from "../../Services/SNAxios";
-import {baseUserImg} from "../../Services/BaseImgs";
+import SNAxios from "../../Services(DAL)/SNAxios";
+import {baseUserImg} from "../../Services(DAL)/BaseImgs";
 
 let FriendsPage = (props) => {
 	if (props.status === statuses.NOT_INITIALIZED) {

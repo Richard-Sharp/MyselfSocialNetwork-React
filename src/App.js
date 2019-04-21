@@ -9,6 +9,8 @@ import MessagePageContainer from "./Components/MessagePage/MessagePageContainer"
 // import UsersContainer from "./Components/UsersPage/UsersContainer";
 import SetUsersPageContainer from "./Components/UsersPage/SetUsersPageContainer";
 import FriendsPageContainer from "./Components/FriendsPage/FriedsPageContainer";
+import Login from "./Login/Login";
+import LoginInfo from "./Login/LoginInfo";
 
 
 
@@ -25,6 +27,7 @@ const App = (props) => {
           <Route path='/messagesPage' render = {() => <MessagePageContainer />}/>
           <Route path='/UsersPage' render = {() => <SetUsersPageContainer />}/>
           <Route path='/FriendsPage' render = {() => <FriendsPageContainer />}/>
+          <Route path='/login' render = {() => <Login />}/>
           {/* <Route exact path='/#settingsPage' component = {Settings}/> */}
         </div>
         </div>
