@@ -1,8 +1,8 @@
 import React from 'react';
 import FriendsPage from "./FriendsPage";
 import {connect} from "react-redux";
-import {setFriendsAC, setStatusAC, unSubscribeAC} from "../../Redux/FriendsPageReducer";
-import {setUsersACreator} from "../../Redux/SetUsersReducer";
+import {setFriendsThunkCreator,
+	unSubdcribeFriendThunkCreator} from "../../Redux/FriendsPageReducer";
 
 let mapStateToProps = (state) => {
 	return {
@@ -14,21 +14,15 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
 	return {
-		setFriends: (users) => {
-		dispatch(setFriendsAC(users))
+		setFriends: () => {
+			dispatch(setFriendsThunkCreator())
 		},
-		setStatus: (status) => {
-			dispatch(setStatusAC(status))
-		},
-		unSubscribe: (userId) => {
-			dispatch(unSubscribeAC(userId))
-		},
-		setUsers: (users) => {
-			dispatch(setUsersACreator(users))
+		unSubscribeFriend: (userId) => {
+			dispatch(unSubdcribeFriendThunkCreator(userId))
 		}
 	}
 }
 
-let FriendsPageContainer = connect(mapStateToProps, mapDispatchToProps)(FriendsPage);
+const FriendsPageContainer = connect(mapStateToProps, mapDispatchToProps)(FriendsPage);
 
 export default FriendsPageContainer;

@@ -1,34 +1,15 @@
 import React from 'react';
 import {statuses} from "../../Redux/FriendsPageReducer";
 import style from './FriendsPage.module.css';
-import SNAxios from "../../Services(DAL)/SNAxios";
 import {baseUserImg} from "../../Services(DAL)/BaseImgs";
 
 let FriendsPage = (props) => {
 	if (props.status === statuses.NOT_INITIALIZED) {
-		props.setStatus(statuses.INPROGRESS)
-		SNAxios
-				.get("users?count=100")
-				.then((response) => {
-					props.setStatus(statuses.SUCCESS)
-					props.setFriends(response.data.items);
-				})
+		props.setFriends();
 	}
 
 	let unSubcribe = (user) => {
-		SNAxios.delete('follow/' + user.id)
-				.then(response => {
-					props.unSubscribe(user.id);
-				})
-		SNAxios
-				.get("users?count=100")
-				.then( (response) => {
-					if(response.data.error) {
-						alert(response.data.error);
-					} else {
-						props.setUsers(response.data.items);
-					}
-				});
+		props.unSubscribeFriend(user.id);
 	};
 
 	let filterFriends = props.users.filter(fr => fr.followed);
@@ -36,18 +17,17 @@ let FriendsPage = (props) => {
 		return <div>Friends not found</div>
 	}
 	return <div> {filterFriends.map(user =>
-					<div className={style.user}>
-					<img className={style.avatar}
-						 src={user.photos.small == null ? baseUserImg : user.photos.small} alt=''/>
-					<div className={style.name}>{user.name}</div>
-					<div className={style.status}>{user.status ? user.status : 'no status'}</div>
-					<div>
+			<div className={style.user}>
+				<img className={style.avatar}
+						 src={user.photos.small == null ? baseUserImg : user.photos.small} alt='avatar'/>
+				<div className={style.name}>{user.name}</div>
+				<div className={style.status}>{user.status ? user.status : 'no status'}</div>
+				<div>
 					<button onClick={() => unSubcribe(user)}>Отписаться</button>
-					</div>
 				</div>
-			)}
 			</div>
+	)}
+	</div>
 }
-
 
 export default FriendsPage;

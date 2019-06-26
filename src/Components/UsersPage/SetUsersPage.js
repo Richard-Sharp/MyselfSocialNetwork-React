@@ -1,85 +1,50 @@
 import React from 'react';
-import SNAxios from "../../Services(DAL)/SNAxios";
 import {baseUserImg} from "../../Services(DAL)/BaseImgs";
+import style from "./usersPage.module.css"
+import {NavLink} from "react-router-dom";
 
+const SetUsersPage = (props) => {
+	let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
+	let pages = [];
+	for (let i = 1; i <= pagesCount; i++) {
+		pages.push(i);
+	}
 
-let style = {
-	width: '100px',
-	height: '100px'
-};
+	return <div className={style.wrapper}>
 
-let SetUsers = (props) => {
+		<div className={style.pagesWrapper}>
+			{pages.map(p => {
+					return <button
+						onClick={() => {props.onPageChanged(p)}}
+						className={props.currentPage === p && style.selectedPage}>{p}</button>
+			})}
+		</div>
 
-	// let loadUsers = () => {
-	// 	// let usersFromServer = [{fullName: 'Dima',	photo: "https://img2.freepng.ru/20180402/ogw/kisspng-computer-icons-user-profile-clip-art-user-avatar-5ac208105c03d6.9558906215226654883769.jpg"}]
-	// }
-
-		SNAxios
-				.get("users?count=100")
-				.then( (response) => {
-					if(response.data.error) {
-						alert(response.data.error);
-					} else {
-						props.setUsers(response.data.items);
-					}
-				});
-
-
-	let unSubcribe = (user) => {
-		SNAxios.delete('follow/' + user.id)
-				.then( response => {
-					props.unSubscribe(user.id);
-				})
-				.catch( (response) => {
-					alert(response.message);
-				})
-		SNAxios
-				.get("users?count=100")
-				.then((response) => {
-					props.setFriends(response.data.items);
-				})
-				.catch( (response) => {
-					alert(response.message);
-				})
-
-	};
-	let subcribeUser = (e) => {
-		let clickedButton = e.target;
-		let userId = +clickedButton.dataset.userId
-		SNAxios.post('follow/' + userId)
-				.then(response => {
-					props.subscribeU(userId);
-
-				})
-				.catch( (response) => {
-						alert(response.message);
-						// if(response.response.status == 401) {
-						// 	alert('Ошибка')
-						// }
-				})
-		SNAxios
-				.get("users?count=100")
-				.then((response) => {
-					props.setFriends(response.data.items);
-				})
-				.catch( (response) => {
-					alert(response.message);
-				})
-	};
-
-	return <div>
-		{/*<div>*/}
-			{/*<button onClick={loadUsers}>Load Users</button>*/}
-		{/*</div>*/}
+		<div className={style.usersWrapper} >
 		{
-			props.users.map(user => <div key={user.id}>
-				<img style={style} src={user.photos.small ? user.photos.small : baseUserImg} alt=""/>
-				<span>{user.name}</span>
-				{user.followed ? <button onClick={() => unSubcribe(user)}>Отписаться</button> : <button data-user-id={user.id} onClick={subcribeUser}>Подписаться</button>}
+			props.users.map(user => <div className={style.users} key={user.id}>
+				<NavLink to={'/user/' + user.id}>
+				<img className={style.userImg} src={user.photos.small
+						? user.photos.small
+						: baseUserImg} alt=""/>
+				</NavLink>
+				<h4>{user.name}</h4>
+
+				{user.followed
+						? <button
+								disabled={props.followingInProgress.some(id => id === user.id)}
+								onClick={() => {
+							props.unSubcribeUser(user)
+						}}>Отписаться</button>
+						: <button
+								data-user-id={user.id}
+								disabled={props.followingInProgress.some(id => id === user.id)}
+								onClick={props.subScribeUser}>Подписаться</button>}
 			</div>)
 		}
+		</div>
 
 	</div>
 }
 
-export default SetUsers;
+export default SetUsersPage;

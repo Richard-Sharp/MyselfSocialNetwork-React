@@ -38,11 +38,14 @@ const messagePageReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SEND_MESSAGE:
 			let body = state.newMessageBody;
-			// let newMessage = [...state.messagesState.push({id: 5, message: body})];
-			let newMessage = [...state.messagesState, {id: 5, message: body}];
-			state.newMessageBody = '';
-			return {...state, messagesState: newMessage};
-
+			// // let newMessage = [...state.messagesState.push({id: 5, message: body})];
+			// let newMessage = [...state.messagesState, {id: 5, message: body}];
+			// state.newMessageBody = '';
+			return {
+				...state,
+				newMessageBody: '',
+				messagesState: [...state.messagesState, {id: 5, message: body}]
+			};
 		case UPDATE_NEW_MESSAGE_BODY:
 			// state.newMessageBody = action.body;
 			return {...state, newMessageBody: action.body};

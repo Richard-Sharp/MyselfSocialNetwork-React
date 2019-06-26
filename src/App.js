@@ -11,6 +11,10 @@ import SetUsersPageContainer from "./Components/UsersPage/SetUsersPageContainer"
 import FriendsPageContainer from "./Components/FriendsPage/FriedsPageContainer";
 import Login from "./Login/Login";
 import LoginInfo from "./Login/LoginInfo";
+import ChangedProfileInfo from "./Components/Profile/ChangedProfileInfo/ChangedProfileInfo";
+import TestComponent from "./Components/Test/UserComponent";
+import ChangedProfileInfoContainer from "./Components/Profile/ChangedProfileInfo/ChangedProfileInfoContainer";
+import LoginRDXForm from "./Login/LoginRDXForm";
 
 
 
@@ -28,6 +32,9 @@ const App = (props) => {
           <Route path='/UsersPage' render = {() => <SetUsersPageContainer />}/>
           <Route path='/FriendsPage' render = {() => <FriendsPageContainer />}/>
           <Route path='/login' render = {() => <Login />}/>
+          <Route path='/loginRDX' render = {() => <LoginRDXForm />}/>
+          <Route exact path='/user/:userId?' render = {() => <ChangedProfileInfo />}/>
+          <Route path='/task' render = {() => <TestComponent />}/>
           {/* <Route exact path='/#settingsPage' component = {Settings}/> */}
         </div>
         </div>

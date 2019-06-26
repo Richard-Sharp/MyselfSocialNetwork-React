@@ -1,0 +1,30 @@
+.wrapper {
+  background: lightgrey;
+  width: 600px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.users {
+  width: 50%;
+  padding: 20px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.admins {
+  width: 50%;
+  padding: 20px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.item {
+  padding: 3px;
+  width: 100%;
+  margin: 5px;
+  border: 2px solid royalblue;
+  border-radius: 10px;
+}
+

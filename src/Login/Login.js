@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from "react-redux";
 import {loginStatuses, loginTH} from "../Redux/LoginReducer";
 import {Redirect} from "react-router-dom";
+import style from "./Login.module.css"
+
 
 
 export const Login = (props) => {
@@ -20,16 +22,18 @@ export const Login = (props) => {
 	let errorMessageBlock = props.status === loginStatuses.ERROR &&
 			<div className='error'>{props.message}</div>;
 
-	return <div>
-		<div><input ref={loginRef} type="text" defaultValue='novitskii.a@gmail.com'/></div>
-		<div><input ref={passwordRef} type="password" defaultValue='3407877n'/></div>
-		<div><input ref={rememberRef} type="checkbox" defaultChecked={true}/></div>
-		<div><button disabled={props.status === loginStatuses.INPROGRESS} onClick={onLoginClock}>LogIn</button></div>
+	return <div className={style.wrapper}>
+		<span>Для того, чтобы просматривать страницу, необходимо авторизироваться!</span> <br/>
+		<h2>Авторизация</h2>
+		<div className={style.divInput}><input ref={loginRef} type="text" defaultValue='novitskii.a@gmail.com'/></div>
+		<div className={style.divInput}><input ref={passwordRef} type="password" defaultValue='3407877n'/></div>
+		<div className={style.divInput}><input ref={rememberRef} type="checkbox" defaultChecked={true}/> Запомнить меня</div>
+		<div className={style.divInput}><button disabled={props.status === loginStatuses.INPROGRESS} onClick={onLoginClock}>LogIn</button></div>
 		{errorMessageBlock}
 	</div>
 }
 
-let maStateToProps = (state) => ({
+let mapStateToProps = (state) => ({
 		isAuth: state.auth.isAuth,
 		status: state.logIn.status,
 		message: state.logIn.message,
@@ -43,4 +47,4 @@ let mapDispatchToProps = (dispatch) => ({
 
 });
 
-export default connect(maStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
