@@ -11,7 +11,7 @@ const TOGGLE_IS_FOLLOWIG = 'SN|SETUSERS|TOGGLE_IS_FOLLOWIG';
 
 let initialState = {
 	items: [],
-	pageSize: 10,
+	pageSize: 20,
 	totalItemsCount: 0,
 	currentPage: 1,
 	isFetching: true,
@@ -71,17 +71,18 @@ export let setUsersTotalCountAC = (totalItemsCount) => ({type: SET_TOTAL_USER_CO
 export let toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 export let toggleFollowingProgressAC = (isFetching, userId) => ({type: TOGGLE_IS_FOLLOWIG, isFetching, userId})
 
-////ThunkCreators
-export const getUsersThunkCreator = (currentPage, pageSize) => {
+//ThunkCreators
+export const getUsersThunkCreator = (page, pageSize) => {
 	return (dispatch) => {
 		dispatch(toggleIsFetchingAC(true));
-		usersAPI.getUsers(currentPage, pageSize)
+		dispatch(setCurrentPageAC(page))
+		usersAPI.getUsers(page, pageSize)
 				.then(data => {
 					if (data.error) {
 						alert(data.error);
 					} else {
 						dispatch(toggleIsFetchingAC(false));
-						dispatch(setCurrentPageAC(currentPage))
+						dispatch(setCurrentPageAC(page))
 						dispatch(setUsersACreator(data.items));
 						dispatch(setUsersTotalCountAC(data.totalCount));
 					}

@@ -1,10 +1,7 @@
 import React from 'react';
-import {connect} from "react-redux";
-import {loginStatuses, loginTH} from "../Redux/LoginReducer";
+import {loginStatuses} from "../Redux/LoginReducer";
 import {Redirect} from "react-router-dom";
 import style from "./Login.module.css"
-
-
 
 export const Login = (props) => {
 	if (props.isAuth) {
@@ -33,18 +30,4 @@ export const Login = (props) => {
 	</div>
 }
 
-let mapStateToProps = (state) => ({
-		isAuth: state.auth.isAuth,
-		status: state.logIn.status,
-		message: state.logIn.message,
-		captchaUrl: state.logIn.captchaUrl
-});
-
-let mapDispatchToProps = (dispatch) => ({
-		login: (login, password, rememberMe) => {
-			dispatch(loginTH(login, password, rememberMe))
-		}
-
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

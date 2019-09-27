@@ -1,5 +1,5 @@
 import {friendsAPI, usersAPI} from "../Services(DAL)/API";
-import {setCurrentPageAC, setUsersACreator, setUsersTotalCountAC, toggleIsFetchingAC} from "./SetUsersReducer";
+import {setUsersACreator, setUsersTotalCountAC} from "./SetUsersReducer";
 
 const SET_FRIENDS = 'SN/FRIENDS/SET_FRIENDS';
 const SET_STATUS = 'SN/FRIENDS/SET_STATUS';
@@ -42,7 +42,7 @@ const FriendsPageReducer = (state = initialState, action) => {
 //ActionCreators
 export const setFriendsAC = (users) => ({type: SET_FRIENDS, users: users});
 export const setStatusAC = (status) => ({type: SET_STATUS, status});
-export let unSubscribeAC = (userId) => ({type: UNSUBSCRIBE, userId});
+export const unSubscribeAC = (userId) => ({type: UNSUBSCRIBE, userId});
 
 //ThunkCreators
 export const setFriendsThunkCreator = () => {

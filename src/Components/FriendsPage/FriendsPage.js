@@ -2,8 +2,10 @@ import React from 'react';
 import {statuses} from "../../Redux/FriendsPageReducer";
 import style from './FriendsPage.module.css';
 import {baseUserImg} from "../../Services(DAL)/BaseImgs";
+import {Redirect} from "react-router-dom";
 
 let FriendsPage = (props) => {
+
 	if (props.status === statuses.NOT_INITIALIZED) {
 		props.setFriends();
 	}

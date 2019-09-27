@@ -5,6 +5,7 @@ import Message from "./Message/Message";
 
 
 
+
 const MessagePage = (props) => {
 	let state = props.messagePage;
 
@@ -18,7 +19,8 @@ const MessagePage = (props) => {
 	let onNewMessageChange = (e) => {
 		let body = e.target.value;
 		props.updateNewMessageBody(body);
-	}
+	};
+
 
 	return (
 			<div className={style.messagePage}>

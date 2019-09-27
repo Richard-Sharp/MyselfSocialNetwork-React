@@ -2,6 +2,8 @@ import React from 'react';
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../Redux/MessagePageReducer";
 import MessagePage from "./MessagePage";
 import {connect} from "react-redux";
+import {AuthRedirectHOC} from "../../HOC/AuthRedirectHOC";
+import {compose} from "redux";
 
 
 // const MessagePageContainer = (props) => {
@@ -19,11 +21,13 @@ import {connect} from "react-redux";
 // 	);
 // }
 
+
+
+
 const mapStateToProps = (state) => {
 	return {
 		messagePage: state.messagePage
-	}
-};
+	}};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
@@ -36,5 +40,12 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-let MessagePageContainer = connect(mapStateToProps, mapDispatchToProps)(MessagePage);
-export default MessagePageContainer;
+
+// let withAuthRedirect = AuthRedirectHOC(MessagePage);
+// let MessagePageContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect);
+// export default MessagePageContainer;
+
+export default compose(
+		connect(mapStateToProps, mapDispatchToProps),
+		AuthRedirectHOC
+)(MessagePage);

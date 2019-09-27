@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './Header.module.css';
-import LoginInfoContainer from "../../Login/LoginInfo";
+import LoginInfoContainer from "../../Login/LoginInfoContainer";
+
 
 
 const Header = () => {

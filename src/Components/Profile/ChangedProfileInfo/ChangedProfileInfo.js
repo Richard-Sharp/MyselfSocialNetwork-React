@@ -14,7 +14,8 @@ class ChangedProfileInfo extends React.Component {
 			profile: null,
 			editMode: false,
 			me: null,
-			isOwner: false
+			isOwner: false,
+			userAvatar: ''
 		}
 	}
 
@@ -24,6 +25,7 @@ class ChangedProfileInfo extends React.Component {
 				.get('profile/' + userIdFromURL)
 				.then((res) => {
 					this.setState({profile: res.data});
+					this.setState({userAvatar: res.data.photos.large});
 				});
 		let mePromise = SNAxios
 				.get('auth/me')
@@ -70,15 +72,21 @@ class ChangedProfileInfo extends React.Component {
 		this.setState({editMode: false})
 	}
 
-	onPhotoChange = () => {
-		this.state.profile.photos.large = 'http://pastilastore.ru/assets/images/products/5318/dsc-0072.png';
+	onPhotoChange = (e) => {
+	debugger;
+		this.state.userAvatar = e.target.files[0];
+		this.setState({userAvatar: e.target.files[0]})
+
+
+		// this.state.profile.photos.large = 'http://pastilastore.ru/assets/images/products/5318/dsc-0072.png';
 
 	}
 
-	uploadPhoto = (newPhoto) => {
-
+	uploadPhoto = () => {
+		let formData = new FormData();
+		formData.append("image", this.state.userAvatar);
 		SNAxios
-				.put('profile/photo', newPhoto, {
+				.put('profile/photo', formData, {
 					headers: {
 						'Content-type': 'multipart/form-data'
 					}
@@ -151,14 +159,14 @@ class ChangedProfileInfo extends React.Component {
 					{editMode && <button onClick={this.onSaveClick}>Save</button>}
 				</div>
 				<div>
-					{profile.photos.large ? <img src={profile.photos.large} alt="avatar"/>
+					{this.state.userAvatar ? <img src={this.state.userAvatar} alt="avatar"/>
 					: <img src={baseUserImg} alt="avatar"/>}
 
 					<input type="file" id='photo'
 								onChange={(e) => {
-									this.onPhotoChange(e.currentTarget)}
+									this.onPhotoChange(e)}
 								}/>
-					<button onClick={() => this.uploadPhoto(profile.photos.large)}>Обновить фото</button>
+					<button onClick={() => this.uploadPhoto(this.userAvatar)}>Обновить фото</button>
 				</div>
 			</div>
 		} else {

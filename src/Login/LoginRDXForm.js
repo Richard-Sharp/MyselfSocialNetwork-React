@@ -1,45 +1,60 @@
 import React from 'react';
-import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
+import {maxLengthValidator, required} from "../Components/Common/Utils/Validators";
+import {Input} from "../Components/Common/FormsControl/FormsControl";
+import {connect} from "react-redux";
+import {loginRDXThunkCreator} from "../Redux/loginRDXReducer";
+import {Redirect} from "react-router-dom";
+import style from '../Components/Common/FormsControl/FormsControl.module.css';
 
-const LoginRDXForm = () => {
-	return <div>
-		<h1>Форма регистрации</h1>
-		<div>
-			<LoginReduxForm onSubmit={bllSubmit}/>
-		</div>
-	</div>
-}
+const maxLength30 = maxLengthValidator(30);
 
-let bllSubmit = (values) => {
-	console.log(values);
-}
 const LoginForm = (props) => {
-
 	return (
-			<form onSubmit={props.handleSubmit}>
-				<Field component={Input} name='login' type='name' placeholder='Ваш логин'
-				validate={requiredValidation}/>
-				<Field component={Input} name='password' type='password' placeholder='Ваш пароль'/>
-				<button type="submit">Отпавить</button>
-			</form>
-	)
-}
+		<form onSubmit={props.handleSubmit}>
+			<div>
+				<Field name={"Email"} type="text" placeholder={"Email"}
+							 component={Input}
+							 validate={[required, maxLength30]}
+				/>
+			</div>
+			<div>
+				<Field name={"Password"} type="password" placeholder={"Password"}
+							 component={Input}
+							 validate={[required, maxLength30]}
+				/>
+			</div>
+			<div>
+				<Field name={"RememberMe"} type="checkbox"
+							 component={"input"}
 
-const Input = ({input, meta, ...props}) => {
+				/> Запомнить данные
+			</div>
+			{props.error && <div className={style.errorLogin}>
+				{props.error}
+			</div>}
+			<div>
+				<button>Login</button>
+			</div>
+		</form>)
+}
+const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
+
+const LoginRDXForm = (props) => {
+	const onSubmit = (formData) => {
+		props.loginRDXThunkCreator(formData.Email, formData.Password, formData.RememberMe);
+	}
+	if(props.isAuth) {
+		return <Redirect to={"/profilePage"} />
+	}
 	return <div>
-		<input {...props} {...input}/>
-		{meta.touched && meta.invalid && <span style={{color: 'red' }}>{meta.error}</span>}
-		{meta.touched && meta.warning && <span style={{color: 'red' }}>{meta.error}</span>}
+		<h2>Авторизация (Redux Form)</h2>
+		<LoginReduxForm onSubmit={onSubmit} />
 	</div>
 }
 
-let requiredValidation = (value) => {
-	if(!value) return "Обязательное поле";
-	return undefined;
-}
+let mapState = (state) => ({
+	isAuth: state.auth.isAuth
+});
 
-let LoginReduxForm = reduxForm({form: 'login-form'})(LoginForm);
-
-export default LoginRDXForm;
+export default connect(mapState, {loginRDXThunkCreator})(LoginRDXForm);

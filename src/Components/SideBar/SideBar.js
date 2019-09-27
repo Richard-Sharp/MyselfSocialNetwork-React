@@ -8,7 +8,7 @@ const SideBar = () => {
         <span className={style.menu}>
           <NavLink to="/profilePage" activeClassName={style.active}>Профиль</NavLink></span>
 				<span className={style.menu}>
-					<NavLink to="/messagesPage" activeClassName={style.active}>Сообщения</NavLink>
+					<NavLink to="/dialogsPage" activeClassName={style.active}>Сообщения</NavLink>
         </span>
 				<span className={style.menu}>
 					<NavLink to="/UsersPage" activeClassName={style.active}>Пользователи</NavLink>

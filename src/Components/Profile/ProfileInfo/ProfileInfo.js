@@ -1,9 +1,12 @@
 import React from 'react';
 import style from './ProfileInfo.module.css';
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import ProfileStatusWithHook from "./ProfileStatus/ProfileStatusWithHook";
 
 const ProfileInfo = (props) => {
 	//let profile = props.profileInfo.profile;
 	return (
+			<>
 			<div className={`${style.prof_settings} ${style.profile_Description}`}>
 
 				<div className={style.avatar}>
@@ -21,7 +24,12 @@ const ProfileInfo = (props) => {
             </span>
 				</div>
 			</div>
-				);
+			<div>
+				<ProfileStatus status={props.status} updateUserStatus={props.updateUserStatusThunkCreator}/>
+				<ProfileStatusWithHook status={props.status} updateUserStatus={props.updateUserStatusThunkCreator}/>
+			</div>
+				</>
+			);
 				}
 
 export default ProfileInfo;

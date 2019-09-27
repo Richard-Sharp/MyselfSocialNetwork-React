@@ -1,6 +1,7 @@
-const ProfileInfoReduser = (state) => {
+
+const ProfileInfoReducer = (state) => {
 	return state;
 
 }
 
-export default ProfileInfoReduser;
+export default ProfileInfoReducer;

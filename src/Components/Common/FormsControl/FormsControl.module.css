@@ -1,0 +1,22 @@
+.formControl {
+
+}
+
+.formControl.error input,
+.error textarea {
+    border: 2px solid #8b312c;
+}
+
+.formControl.error span {
+    color: #8b312c;
+}
+
+.errorLogin {
+    margin: 5px;
+    border: 2px solid #8b312c;
+    padding: 5px;
+    color: #8b312c;
+    font-weight: bold;
+    border-radius: 5px;
+
+}

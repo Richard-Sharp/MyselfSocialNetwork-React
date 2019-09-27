@@ -7,6 +7,15 @@ import {
 	unSubscribeThunkCreator
 } from "../../Redux/SetUsersReducer";
 import Preloader from "../Common/Preloader/Preloader";
+import {Redirect} from "react-router-dom";
+import {
+	geFollowingInProgress,
+	getCurrentPage,
+	getIsFetching,
+	getPageSize,
+	getTotalItemsCount,
+	getUsers
+} from "../../Redux/Selectors/Users-Selectors";
 
 
 class SetUsersListAPI extends React.Component {
@@ -28,6 +37,10 @@ class SetUsersListAPI extends React.Component {
 		this.props.getUsersThunk(pageNumber, this.props.pageSize);
 	}
 
+	authRedirect = () => {
+		return <Redirect to={"/login"} />
+	}
+
 	render() {
 		return <>
 			{this.props.isFetching && <Preloader />}
@@ -40,20 +53,35 @@ class SetUsersListAPI extends React.Component {
 				unSubcribeUser={this.unSubcribeUser}
 				subScribeUser={this.subScribeUser}
 				followingInProgress={this.props.followingInProgress}
+				isAuth={this.props.isAuth}
+				authRedirect={this.authRedirect}
 		/>
 		</>
 	}
 }
 
-let mapStateToProps = (state) => ({
-	users: state.setUsersPage.items,
-	pageSize: state.setUsersPage.pageSize,
-	totalItemsCount: state.setUsersPage.totalItemsCount,
-	currentPage: state.setUsersPage.currentPage,
-	isFetching: state.setUsersPage.isFetching,
-	followingInProgress: state.setUsersPage.followingInProgress
+// let mapStateToProps = (state) => ({
+// 	users: state.setUsersPage.items,
+// 	pageSize: state.setUsersPage.pageSize,
+// 	totalItemsCount: state.setUsersPage.totalItemsCount,
+// 	currentPage: state.setUsersPage.currentPage,
+// 	isFetching: state.setUsersPage.isFetching,
+// 	followingInProgress: state.setUsersPage.followingInProgress,
+// 	isAuth: state.auth.isAuth
+// })
 
+let mapStateToProps = (state) => ({
+	users: getUsers(state),
+	pageSize: getPageSize(state),
+	totalItemsCount: getTotalItemsCount(state),
+	currentPage: getCurrentPage(state),
+	isFetching: getIsFetching(state),
+	followingInProgress: geFollowingInProgress(state),
+	isAuth: state.auth.isAuth
 })
+
+
+
 
 let mapDispstchToProps = (dispatch) => ({
 	subscribe: (userId) => {
