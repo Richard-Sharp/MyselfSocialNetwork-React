@@ -1,50 +1,28 @@
 import React from 'react';
-import {baseUserImg} from "../../Services(DAL)/BaseImgs";
 import style from "./usersPage.module.css"
-import {NavLink} from "react-router-dom";
+import Pagenator from "../Common/Pagenator/Pagenator";
+import User from "./User";
 
-const SetUsersPage = (props) => {
-	let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
-	let pages = [];
-	for (let i = 1; i <= pagesCount; i++) {
-		pages.push(i);
-	}
+const SetUsersPage = ({currentPage, totalItemsCount, pageSize, onPageChanged, ...props}) => {
 
 	return <div className={style.wrapper}>
-		<div className={style.pagesWrapper}>
-			{pages.map(p => {
-				return <button
-						onClick={() => {
-							props.onPageChanged(p)
-						}}
-						className={props.currentPage === p && style.selectedPage}>{p}</button>
-			})}
-		</div>
+
+		<Pagenator currentPage={currentPage}
+							 totalItemsCount={totalItemsCount}
+							 pageSize={pageSize}
+							 onPageChanged={onPageChanged}/>
 
 		<div className={style.usersWrapper}>
-			{
-				props.users.map(user => <div className={style.users} key={user.id}>
-					<NavLink to={'/user/' + user.id}>
-						<img className={style.userImg} src={user.photos.small
-								? user.photos.small
-								: baseUserImg} alt=""/>
-					</NavLink>
-					<h4>{user.name}</h4>
-
-					{user.followed
-							? <button
-									disabled={props.followingInProgress.some(id => id === user.id)}
-									onClick={() => {
-										props.unSubcribeUser(user)
-									}}>Отписаться</button>
-							: <button
-									data-user-id={user.id}
-									disabled={props.followingInProgress.some(id => id === user.id)}
-									onClick={props.isAuth ? props.subScribeUser : props.authRedirect}>Подписаться</button>}
-				</div>)
-			}
+			{props.users.map(user =>
+						<User user={user}
+									key={user.id}
+									followingInProgress={props.followingInProgress}
+									subScribeUser={props.subScribeUser}
+									unSubcribeUser={props.unSubcribeUser}
+									isAuth={props.isAuth}
+									authRedirect={props.authRedirect}	/>
+			)}
 		</div>
-
 	</div>
 }
 

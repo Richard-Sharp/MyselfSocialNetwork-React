@@ -22,11 +22,12 @@ export const AuthReducer = (state = initialState, action) => {
 			return {...state, isAuth: action.value}
 
 		case SET_USER_INFO:
-			return {...state,
+			return {
+				...state,
 				userInfo: {
-						...state.userInfo,
-						userId: action.userId,
-						userName: action.userName
+					...state.userInfo,
+					userId: action.userId,
+					userName: action.userName
 				}
 			}
 
@@ -40,25 +41,20 @@ export const setIsAuth = (value) => ({type: SET_IS_AUTH, value});
 export const setUserInfo = (userId, userName) => ({type: SET_USER_INFO, userId, userName});
 
 //ThunkCreators
-export const infoMeThunkCreator = () => (dispatch) => {
-	loginAPI.authMe()
-			.then(data => {
-				if (data.resultCode === 0) {
-					dispatch(setIsAuth(true));
-					dispatch(setUserInfo(data.data.id, data.data.login));
-					dispatch(getUserStatusThunkCreator(data.data.id));
-				}
-			})
+export const infoMeThunkCreator = () => async (dispatch) => {
+	let data = await loginAPI.authMe();
+	if (data.resultCode === 0) {
+		dispatch(setIsAuth(true));
+		dispatch(setUserInfo(data.data.id, data.data.login));
+		dispatch(getUserStatusThunkCreator(data.data.id));
+	}
 };
-export const logOutThunkCreator = () => (dispatch) => {
-	loginAPI.authLogOut()
-			.then(data => {
-				if (data.resultCode === 0) {
-					dispatch(setIsAuth(false));
-					dispatch(setUserInfo(null, null));
-					dispatch(setFriendsThunkCreator());
-					dispatch(getUsersThunkCreator());
-
-				}
-			})
+export const logOutThunkCreator = () => async (dispatch) => {
+	let data = await loginAPI.authLogOut();
+	if (data.resultCode === 0) {
+		dispatch(setIsAuth(false));
+		dispatch(setUserInfo(null, null));
+		dispatch(setFriendsThunkCreator());
+		dispatch(getUsersThunkCreator());
+	}
 };
