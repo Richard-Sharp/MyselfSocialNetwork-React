@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer from "./ProfileReducer";
 import messagePageReducer from "./MessagePageReducer";
 import friendsPageReducer from "./FriendsPageReducer";
@@ -15,7 +15,7 @@ import {logger} from "redux-logger";
 import SimpleDrawingToolReducer from "../Components/TASKS/SimpleDrawingTool/SimpleDrawingToolReducer";
 import {AppReducer} from "./AppReducer";
 
-let store = createStore(combineReducers({
+let reducers = combineReducers({
 	profilePage: profileReducer,
 	messagePage: messagePageReducer,
 	friendsPage: friendsPageReducer,
@@ -28,9 +28,12 @@ let store = createStore(combineReducers({
 	dialogsPage: DialogPageReducer,
 	drawTools: SimpleDrawingToolReducer,
 	AppPage: AppReducer
-}), applyMiddleware(logger, thunkMiddleware))
+});
 
-window.store = store;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(logger, thunkMiddleware)));
+
+window._store_ = store;
 
 
 export default store;
